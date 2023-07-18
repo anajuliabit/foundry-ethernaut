@@ -8,12 +8,13 @@
     {
       "files": "*.sol",
       "options": {
+        "parser": "solidity-parse",
         "printWidth": 120,
         "tabWidth": 4,
         "useTabs": false,
         "singleQuote": false,
         "bracketSpacing": false,
-        "explicitTypes": "always"
+        #"explicitTypes": "always"
       }
     }
   ]
