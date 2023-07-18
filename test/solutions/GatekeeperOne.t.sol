@@ -2,7 +2,7 @@
 pragma solidity >=0.6.0;
 pragma experimental ABIEncoderV2;
 
-import "./utils/BaseTest.sol";
+import "../utils/BaseTest.sol";
 import "src/levels/GatekeeperOne.sol";
 import "src/levels/GatekeeperOneFactory.sol";
 import "forge-std/console.sol";

@@ -2,7 +2,7 @@
 pragma solidity >=0.6.0;
 pragma experimental ABIEncoderV2;
 
-import "./utils/BaseTest.sol";
+import "../utils/BaseTest.sol";
 import "src/levels/MagicNum.sol";
 import "src/levels/MagicNumFactory.sol";
 

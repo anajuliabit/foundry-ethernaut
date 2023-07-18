@@ -2,7 +2,7 @@
 pragma solidity >=0.6.0;
 pragma experimental ABIEncoderV2;
 
-import "./utils/BaseTest.sol";
+import "../utils/BaseTest.sol";
 import "src/levels/Fallout.sol";
 import "src/levels/FalloutFactory.sol";
 
